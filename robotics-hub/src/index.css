@@ -1,0 +1,102 @@
+/* --- THE LIGHT THEME (Default) --- */
+:root {
+  --bg-gradient: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%);
+  --window-bg: #ffffff;
+  --window-border: #cbd5e1;
+  --text-main: #334155;
+  --text-muted: #64748b;
+  --titlebar-bg: #475569;
+  --titlebar-text: #f8fafc;
+  --nav-hover: #f1f5f9;
+  --accent: #f59e0b; /* The warm yellow from your inspiration */
+}
+
+/* --- THE DARK THEME --- */
+[data-theme='dark'] {
+  --bg-gradient: linear-gradient(180deg, #0f172a 0%, #172554 100%);
+  --window-bg: #1e293b;
+  --window-border: #334155;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --titlebar-bg: #0f172a;
+  --titlebar-text: #e2e8f0;
+  --nav-hover: #334155;
+  --accent: #38bdf8; /* A bright, glowing blue for dark mode */
+}
+
+/* --- GLOBAL STYLES --- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  color: var(--text-main);
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* --- THE "OS WINDOW" FRAMEWORK --- */
+.os-window {
+  background-color: var(--window-bg);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  border: 1px solid var(--window-border);
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.os-titlebar {
+  background-color: var(--titlebar-bg);
+  color: var(--titlebar-text);
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Window Buttons */
+.os-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.dot-red { background-color: #ff5f56; }
+.dot-yellow { background-color: #ffbd2e; }
+.dot-green { background-color: #27c93f; }
+
+/* --- SIDEBAR NAVIGATION STYLES --- */
+.nav-link {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, transform 0.1s;
+  display: block;
+  font-size: 16px;
+}
+
+.nav-link:hover {
+  background-color: var(--nav-hover);
+  transform: translateX(4px); /* Cute little slide effect on hover */
+}
+
+/* --- UNIVERSAL INPUT STYLES --- */
+.os-input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid var(--window-border);
+  background-color: var(--window-bg); /* Adapts to light/dark automatically */
+  color: var(--text-main);           /* Adapts to light/dark automatically */
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  box-sizing: border-box;
+  transition: all 0.2s;
+}
+
+.os-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2); /* Soft glow on focus */
+}
