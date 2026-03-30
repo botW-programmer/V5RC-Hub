@@ -33,7 +33,7 @@ export default function EasterEgg({ isOpen, onClose }) {
       const bot = k.add([
         k.rect(30, 30),
         k.pos(50, 100),
-        k.color(228, 45, 45), // VEX Red
+        k.color(rgb(94, 162, 201)), // cute blue color
         k.area(),
         k.body(),
       ]);
@@ -42,7 +42,7 @@ export default function EasterEgg({ isOpen, onClose }) {
       k.add([
         k.rect(600, 40),
         k.pos(0, 260),
-        k.color(100, 100, 100),
+        k.color(100, 100, 100), // gray floor
         k.area(),
         k.body({ isStatic: true }),
       ]);
@@ -77,7 +77,7 @@ export default function EasterEgg({ isOpen, onClose }) {
           k.area(),
           k.pos(600, 260),
           k.anchor("botleft"), // Keeps it sitting flush on the floor
-          k.color(255, 180, 0), // Yellow/Orange
+          k.color(8, 35, 51), // deep grayish blue
           k.move(k.LEFT, GAME_SPEED), // Move left constantly
           "obstacle", // THIS IS THE TAG
         ]);
