@@ -1,9 +1,12 @@
-import { 
-  User, Code2, Palette, Sparkles, ExternalLink
-} from 'lucide-react';
+import { useState } from 'react';
+import { User, Code2, Palette, Sparkles, ExternalLink } from 'lucide-react';
 import './index.css';
+import EasterEgg from './EasterEgg'; // Added the Easter Egg import
 
 export default function About() {
+  // Added state to control the game pop-up
+  const [showGame, setShowGame] = useState(false);
+
   const skills = [
     { name: "Development", icon: <Code2 size={16} />, color: "#38bdf8" },
     { name: "Illustration", icon: <Palette size={16} />, color: "#fb923c" },
@@ -74,21 +77,50 @@ export default function About() {
             <p style={bodyTextStyle}>
               Honestly, it was a learning curve. I really wanted to create something new, something I hadn't done before, so I decided to learn JavaScript. I still don't fully understand everything, but if you are interested in developing a website, I would recommend using Gemini as a guide. Ask it lots of questions, and really try to figure out how things work! I also used a lot of online resources, like Stack Overflow, W3schools, and YouTube tutorials. It took a lot of trial and error, but it was worth it!
             </p>
-
-            <p style={bodyTextStyle}>
-             
-            </p>
             
             <p style={headerLabelStyle}>come check me out :D</p>
 
-
             <p style={bodyTextStyle}>
-             Here is the link to my GitHub - Please don't mind if it's empty, it's a work in process! - https://github.com/botW-programmer
+              Here is the link to my GitHub - Please don't mind if it's empty, it's a work in process! <br/>
+              <a 
+                href="https://github.com/botW-programmer" 
+                target="_blank" 
+                rel="noreferrer"
+                style={{ color: 'var(--accent)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '5px', marginTop: '10px' }}
+              >
+                <ExternalLink size={16} /> https://github.com/botW-programmer
+              </a>
             </p>
+
+            {/* --- THE SNEAKY BUTTON --- */}
+            <div style={{ marginTop: '60px', display: 'flex', justifyContent: 'center' }}>
+              <button 
+                onClick={() => setShowGame(true)}
+                title="???"
+                style={{
+                  width: '12px',
+                  height: '12px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--text-muted)',
+                  opacity: 0.2,
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'background-color 0.3s, opacity 0.3s'
+                }}
+                onMouseEnter={(e) => { e.target.style.backgroundColor = '#e42d2d'; e.target.style.opacity = '1'; }}
+                onMouseLeave={(e) => { e.target.style.backgroundColor = 'var(--text-muted)'; e.target.style.opacity = '0.2'; }}
+              />
+            </div>
 
           </div>
         </div>
       </div>
+
+      {/* --- THE GAME MODAL --- */}
+      <EasterEgg 
+        isOpen={showGame} 
+        onClose={() => setShowGame(false)} 
+      />
     </div>
   );
 }
