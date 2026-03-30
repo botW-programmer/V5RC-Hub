@@ -33,7 +33,7 @@ export default function EasterEgg({ isOpen, onClose }) {
       const bot = k.add([
         k.rect(30, 30),
         k.pos(50, 100),
-        k.color(rgb(94, 162, 201)), // cute blue color
+        k.color(94, 162, 201), // cute blue color
         k.area(),
         k.body(),
       ]);
