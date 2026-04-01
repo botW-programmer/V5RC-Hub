@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { 
   Sun, Moon, Bot, Home as HomeIcon, BookOpen, 
   Settings, Trophy, Code, PlaneTakeoff, FlaskConical, 
-  MessageSquare, User 
+  MessageSquare, User, Gamepad2 
 } from 'lucide-react';
 import './index.css'; 
 
@@ -53,6 +53,8 @@ export default function App() {
               <Link to="/checklist" className="nav-link"><span style={iconAlign}><PlaneTakeoff size={18} /> Checklist</span></Link>
               <Link to="/messages" className="nav-link"><span style={iconAlign}><MessageSquare size={18} /> Messages</span></Link>
               <Link to="/about" className="nav-link"><span style={iconAlign}><User size={18} /> About Me</span></Link>
+              <Link to="/sandbox" className="nav-link"><span style={iconAlign}><Gamepad2 size={18} /> Rover Sandbox</span></Link>
+              
             </nav>
           </div>
         </div>

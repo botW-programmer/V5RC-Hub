@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { 
   BookOpen, Settings, Trophy, Code, 
-  PlaneTakeoff, MessageSquare, User 
+  PlaneTakeoff, MessageSquare, User, Gamepad2
 } from 'lucide-react';
 import './index.css'; 
 
@@ -42,6 +42,12 @@ export default function Home() {
       path: "/messages", 
       icon: <MessageSquare size={48} strokeWidth={1.5} />, 
       desc: "Leave recommendations, build tips, or feature requests." 
+    },
+    { 
+      name: "Rover Sandbox", 
+      path: "/sandbox", 
+      icon: <Gamepad2 size={48} strokeWidth={1.5} />, 
+      desc: "Test custom drive physics in a 2D simulation." 
     },
     { 
       name: "About Me", 
@@ -86,7 +92,6 @@ export default function Home() {
         <p style={{ fontSize: '18px', color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontWeight: '600' }}>
           before i forget! feel free to use excerpts of this web app in your engineering notebooks!
         </p>
-
 
       </div>
 
