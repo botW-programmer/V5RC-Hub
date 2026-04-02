@@ -1,38 +1,95 @@
 import { useState, useEffect } from 'react';
 import { MessageSquare, Send, Trash2, User, StickyNote } from 'lucide-react';
+import { supabase } from './supabaseClient'; // <-- Importing your new database connection!
 import './index.css';
 
 export default function MessageBoard() {
-  const [messages, setMessages] = useState(() => {
-    const saved = localStorage.getItem('hub_messages');
-    return saved ? JSON.parse(saved) : [];
-  });
-  
+  const [messages, setMessages] = useState([]);
   const [userName, setUserName] = useState("");
   const [text, setText] = useState("");
 
-  useEffect(() => {
-    localStorage.setItem('hub_messages', JSON.stringify(messages));
-  }, [messages]);
+  // --- READ: Fetch messages from the Cloud ---
+  const fetchMessages = async () => {
+    const { data, error } = await supabase
+      .from('messages')
+      .select('*')
+      .order('created_at', { ascending: false }); // Newest messages at the top
 
-  const handleSubmit = (e) => {
+    if (error) {
+      console.error("Error fetching messages:", error);
+    } else {
+      setMessages(data);
+    }
+  };
+
+  useEffect(() => {
+    // 1. Fetch messages as soon as the page loads
+    fetchMessages();
+    
+    // 2. Set up a listener for real-time cloud updates
+    const channel = supabase
+      .channel('schema-db-changes')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'messages' }, (payload) => {
+        fetchMessages(); // Refresh the feed if someone else posts!
+      })
+      .subscribe();
+
+    return () => supabase.removeChannel(channel);
+  }, []);
+
+  // --- CREATE: Send a new message to Supabase ---
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!text.trim()) return;
 
-    const newMessage = {
-      id: Date.now(),
-      author: userName.trim() || "Anonymous Scout",
-      content: text,
-      date: new Date().toLocaleDateString()
-    };
+    const { error } = await supabase
+      .from('messages')
+      .insert([
+        { 
+          author: userName.trim() || "Anonymous Scout", 
+          content: text 
+        }
+      ]);
 
-    setMessages([newMessage, ...messages]);
-    setText("");
-    setUserName("");
+    if (error) {
+      console.error("Error adding document: ", error);
+      alert("Oops, couldn't send the message. Check your console for details.");
+    } else {
+      setText("");
+      setUserName("");
+      fetchMessages(); // Update the screen locally
+    }
   };
 
-  const deleteMessage = (id) => {
-    setMessages(messages.filter(m => m.id !== id));
+  // --- DELETE: Remove a message from the Cloud ---
+// --- DELETE: Remove a message from the Cloud (ADMIN ONLY) ---
+const deleteMessage = async (id) => {
+    const passcode = prompt("Admin Passcode Required:");
+    
+    // We swapped the hardcoded password for the secret environment variable!
+    if (passcode !== import.meta.env.VITE_ADMIN_PASSCODE) {
+      alert("Access Denied: Incorrect Passcode :(");
+      return; 
+    }
+    
+
+    // 3. If password is right, delete it from Supabase
+    const { error } = await supabase
+      .from('messages')
+      .delete()
+      .eq('id', id);
+      
+    if (error) {
+      console.error("Error deleting document: ", error);
+    } else {
+      fetchMessages(); // Update the screen
+    }
+  };
+
+  // Helper function to make the database timestamps look pretty
+  const formatDate = (isoString) => {
+    if (!isoString) return "Just now";
+    return new Date(isoString).toLocaleDateString() + ' ' + new Date(isoString).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
   };
 
   return (
@@ -45,7 +102,6 @@ export default function MessageBoard() {
           <h2 style={{ margin: 0, fontSize: '32px', color: 'var(--text-main)', fontWeight: '700' }}>Recommendations  ₍^. .^₎⟆</h2>
           <p style={{ margin: '5px 0 0 0', color: 'var(--text-muted)', fontWeight: '600' }}>Leave a note, a build tip, or a feature request. If it's doable, it'll be done!</p>
           <p style={{ margin: '5px 0 0 0', color: 'var(--text-muted)', fontWeight: '600' }}>Please note that if you leave a suggestion, it becomes public - anyone on the site will be able to see it!</p>
-
         </div>
       </div>
 
@@ -93,7 +149,7 @@ export default function MessageBoard() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <StickyNote size={16} color="var(--accent)" />
                   <span style={{ fontWeight: '700', color: 'var(--text-main)' }}>{msg.author}</span>
-                  <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>• {msg.date}</span>
+                  <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>• {formatDate(msg.created_at)}</span>
                 </div>
                 <button 
                   onClick={() => deleteMessage(msg.id)}
