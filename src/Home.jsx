@@ -11,7 +11,7 @@ export default function Home() {
       name: "Parts Wiki", 
       path: "/wiki", 
       icon: <BookOpen size={48} strokeWidth={1.5} />, 
-      desc: "Search the ultimate V5RC hardware database." 
+      desc: "Search the ultimate VRC hardware database." 
     },
     { 
       name: "Gear Calculator", 
@@ -63,7 +63,7 @@ export default function Home() {
       {/* --- HERO SECTION --- */}
       <div style={{ textAlign: 'center', marginBottom: '50px' }}>
         <h1 style={{ fontSize: '48px', margin: '0 0 10px 0', fontWeight: '700' }}>
-          hi! i'm <span style={{ color: 'var(--accent)' }}>robotics hub</span>
+          hi! i'm <span style={{ color: 'var(--accent)' }}>robo hub</span>
         </h1>
         <p style={{ fontSize: '18px', color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontWeight: '600' }}>
           your team's digital command center.
