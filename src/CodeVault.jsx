@@ -238,7 +238,7 @@ export default function CodeVault() {
         <Code2 size={40} color="var(--accent)" />
         <div>
           <h2 style={{ margin: 0, fontSize: '32px', color: 'var(--text-main)', fontWeight: '700' }}>Code Vault</h2>
-          <p style={{ margin: '5px 0 0 0', color: 'var(--text-muted)', fontWeight: '600' }}>are you a new team, don't know how to code, or are someone simply tired of rewriting basic code structure? well, i've got you covered! in my free time, i program some basic code snippets from different programs in python, then translate them to C++. while i can't say that everything 100% works, it all looks correct to me! use these code snippets free of charge!</p>
+          <p style={{ margin: '5px 0 0 0', color: 'var(--text-muted)', fontWeight: '600' }}>Are you a new team, don't know how to code, or are someone simply tired of rewriting basic code structure? Well, i've got you covered! In my free time, I programed and gathered some basic code snippets for Python and C++ that you might need in your next program! While i can't say that everything 100% works, it all looks correct to me! use these code snippets free of charge! If you want to contribute to the vault then please drop your code in the message board!</p>
         </div>
       </div>
 
