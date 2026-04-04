@@ -67,18 +67,18 @@ export default function About() {
             </p>
 
             {/* Section 2 */}
-            <p style={headerLabelStyle}>why did i create this hub?</p>
+            <p style={headerLabelStyle}>Why did I create this hub?</p>
             <p style={bodyTextStyle}>
               I built this Robotics Hub because I realized that despite how many kids compete in V5RC, there are so many things that could make our experience as roboticists better! I wanted to create a tool that could help teams stay organized, share knowledge, and have fun with robotics!
             </p>
 
             {/* Section 3 */}
-            <p style={headerLabelStyle}>how did i build this hub?</p>
+            <p style={headerLabelStyle}>How did I build this hub?</p>
             <p style={bodyTextStyle}>
               Honestly, it was a learning curve. I really wanted to create something new, something I hadn't done before, so I decided to learn JavaScript. I still don't fully understand everything, but if you are interested in developing a website, I would recommend using Gemini as a guide. Ask it lots of questions, and really try to figure out how things work! I also used a lot of online resources, like Stack Overflow, W3schools, and YouTube tutorials. It took a lot of trial and error, but it was worth it!
             </p>
             
-            <p style={headerLabelStyle}>come check me out :D</p>
+            <p style={headerLabelStyle}>Come check me out :D</p>
 
             <p style={bodyTextStyle}>
               Here is the link to my GitHub - Please don't mind if it's empty, it's a work in process! <br/>

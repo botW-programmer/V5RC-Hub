@@ -63,10 +63,10 @@ export default function Home() {
       {/* --- HERO SECTION --- */}
       <div style={{ textAlign: 'center', marginBottom: '50px' }}>
         <h1 style={{ fontSize: '48px', margin: '0 0 10px 0', fontWeight: '700' }}>
-          hi! i'm <span style={{ color: 'var(--accent)' }}>robo hub</span>
+          Hi! I'm <span style={{ color: 'var(--accent)' }}>RoboHub</span>
         </h1>
         <p style={{ fontSize: '18px', color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontWeight: '600' }}>
-          your team's digital command center.
+          Your team's digital command center.
         </p>
 
         <p style={{ fontSize: '18px', color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontWeight: '600' }}>
@@ -74,7 +74,7 @@ export default function Home() {
         </p>
         
         <p style={{ fontSize: '18px', color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontWeight: '600' }}>
-          everything here is free to use! i recommend bookmarking this site and sharing it with your teammates and other V5RC teams.
+          Everything here is free to use! I recommend bookmarking this site and sharing it with your teammates and other V5RC teams.
         </p>
 
         <p style={{ fontSize: '18px', color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontWeight: '600' }}>
@@ -82,7 +82,7 @@ export default function Home() {
         </p>
         
         <p style={{ fontSize: '18px', color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontWeight: '600' }}>
-          if you have any suggestions or find a bug, please leave a note on the <Link to="/messages" style={{ color: 'var(--accent)', fontWeight: '600' }}>Message Board</Link> - if it's doable, it'll be done!
+          If you have any suggestions or find a bug, please leave a note on the <Link to="/messages" style={{ color: 'var(--accent)', fontWeight: '600' }}>Message Board</Link> - if it's doable, it'll be done!
         </p>
 
         <p style={{ fontSize: '18px', color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontWeight: '600' }}>
@@ -90,7 +90,7 @@ export default function Home() {
         </p>
 
         <p style={{ fontSize: '18px', color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontWeight: '600' }}>
-          before i forget! feel free to use excerpts of this web app in your engineering notebooks!
+          Before I forget! Feel free to use excerpts of this web app in your engineering notebooks!
         </p>
 
       </div>

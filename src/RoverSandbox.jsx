@@ -123,10 +123,20 @@ export default function RoverSandbox() {
   }, [position, waypoints, interactionMode, draggingTask]);
 
   return (
-    // NEW: Notice the padding string here (top, right, bottom, left) and the minHeight!
     <div style={{ padding: '40px 20px 120px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: '100vh' }}>
-      <h2 style={{ marginTop: 0, marginBottom: '30px' }}>V5RC Autonomous Playbook</h2>
       
+      {/* HEADER SECTION */}
+      <div style={{ textAlign: 'center', maxWidth: '800px', marginBottom: '40px' }}>
+        <h2 style={{ margin: '0 0 10px 0', fontSize: '32px', color: 'var(--text-main)', fontWeight: '700' }}>Autonomous Playbook</h2>
+        <p style={{ margin: 0, color: 'var(--text-muted)', fontWeight: '500', lineHeight: '1.5', fontSize: '15px' }}>
+          Visually plan your robot's path and automatically generate coordinate arrays in both C++ and Python for your autonomous routines! 
+          <br/><br/>
+          <span style={{ color: 'var(--accent)', fontWeight: 'bold' }}>
+            (Note: The background will be updated with the official field map once the 2026-2027 V5RC game is announced at Worlds!)
+          </span>
+        </p>
+      </div>
+
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '30px', justifyContent: 'center', width: '100%', maxWidth: '1200px' }}>
         
         {/* Left Side: Canvas & Controls */}

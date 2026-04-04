@@ -80,7 +80,7 @@ export default function ScoutingDatabase() {
           <Database size={40} color="var(--accent)" />
           <div>
             <h2 style={{ margin: 0, fontSize: '32px', color: 'var(--text-main)', fontWeight: '700' }}>Scouting DB</h2>
-            <p style={{ margin: '5px 0 0 0', color: 'var(--text-muted)', fontWeight: '600' }}>during competitions, picking an alliance partner is difficult... so i created a program that picks one for you! just fill in the necessary information for each team, click on the leaderboard tab, and BOOM; you have your ideal alliance partner! please note that this does not save when you close the web app - i sadly can't figure out how to do that yet :D</p>
+            <p style={{ margin: '5px 0 0 0', color: 'var(--text-muted)', fontWeight: '600' }}>During competitions, picking an alliance partner is difficult... so I created a program that picks one for you! Just fill in the necessary information for each team, click on the leaderboard tab, and BOOM; you have your ideal alliance partner! Please note that this does not save when you close the web app - I sadly haven't figured out how to do that yet :D</p>
           </div>
         </div>
         

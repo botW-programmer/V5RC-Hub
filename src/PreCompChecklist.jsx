@@ -2,30 +2,64 @@ import { useState, useEffect } from 'react';
 import { PlaneTakeoff, RotateCcw, Check, ListChecks } from 'lucide-react';
 import './index.css';
 
-// The Ultimate Pre-Competition Packing & Prep List
-const defaultChecklist = [
-  { id: 1, text: "All V5 Robot Batteries fully charged (including spares)", completed: false },
-  { id: 2, text: "V5 Controllers fully charged and paired to Brain", completed: false },
-  { id: 3, text: "Firmware updated to the latest version on Brain & Controller", completed: false },
-  { id: 4, text: "Latest competition code downloaded to Brain and tested", completed: false },
-  { id: 5, text: "Code backed up to GitHub or a physical flash drive", completed: false },
-  { id: 6, text: "Physical Engineering Notebook packed", completed: false },
-  { id: 7, text: "Safety glasses packed for EVERY team member", completed: false },
-  { id: 8, text: "Toolbox packed (Hex keys, wrenches, zip-ties, tape, cutters)", completed: false },
-  { id: 9, text: "Spare parts packed (Motors, extra C-channel, screws, nuts)", completed: false },
-  { id: 10, text: "All smart cables fully seated and zip-tied away from gears/wheels", completed: false },
-  { id: 11, text: "Robot dimensions verified (Fits strictly within 18\"x18\"x18\")", completed: false },
-  { id: 12, text: "License plates packed (Both Red and Blue)", completed: false },
-  { id: 13, text: "Participant Consent Forms and Team Roster printed", completed: false },
-];
+// The New Technical Data Structure
+const rawChecklistData = {
+  "Pre-Tournament": [
+    "Verify V5 Brain and Controller firmware are up to date via VEXcode.",
+    "Calibrate Inertial Sensor (IMU) and Vision Sensors.",
+    "Check all drive and lift shafts for twisted axles or friction buildup.",
+    "Ensure all motor cartridges (e.g., 600rpm/blue) match the code configuration.",
+    "Download and verify all Autonomous routines (Skills, Left side, Right side) on the Brain.",
+    "Backup code to an external flash drive or GitHub."
+  ],
+  "Packing for Tournament": [
+    "Pack minimum 4 fully charged V5 Batteries and 2 chargers.",
+    "Pack spare V5 Smart Cables (assorted lengths) and a crimping tool.",
+    "Pack spare structural parts (c-channels, standoffs, zip-ties, rubber bands).",
+    "Pack safety glasses for the drive team and pit crew.",
+    "Pack the V5 Controller and a backup USB-C charging cable."
+  ],
+  "Pre-Inspection": [
+    "Verify robot fits comfortably within the 18\" x 18\" x 18\" sizing tool.",
+    "Ensure correct Alliance License Plates (Red/Blue) are securely mounted and visible.",
+    "Check that pneumatics are completely empty before pressure testing with the inspector.",
+    "File down any sharp edges or exposed metal.",
+    "Have the VEXcode 'Device Info' screen ready for software inspection."
+  ],
+  "Pre-Match": [
+    "Insert a fresh, 100% charged V5 Battery.",
+    "Pressurize pneumatic system to exactly 100 PSI (check for leaks).",
+    "Verify the V5 Radio is securely plugged into a smart port and flashing.",
+    "Select the correct Autonomous routine on the brain for your starting position.",
+    "Pre-load rings/game elements onto the robot per the current game manual.",
+    "Turn on Controller and verify a solid connection to the Brain."
+  ],
+  "Post-Match": [
+    "Turn off V5 Brain to preserve battery.",
+    "Inspect robot for loose screws, shifted collars, or bent metal.",
+    "Check motors for overheating (swap if necessary).",
+    "Log match data/scouting notes while it's fresh in your mind.",
+    "Place the used battery on the charger."
+  ]
+};
+
+// Convert the object above into a flat array so our progress bar and saves work perfectly
+let idCounter = 1;
+const defaultChecklist = [];
+for (const [category, tasks] of Object.entries(rawChecklistData)) {
+  for (const text of tasks) {
+    defaultChecklist.push({ id: idCounter++, category, text, completed: false });
+  }
+}
 
 export default function PreCompChecklist() {
   const [checklist, setChecklist] = useState(() => {
-    const saved = localStorage.getItem("precomp_checklist");
+    // Changed the key to _v2 so it doesn't conflict with your old data!
+    const saved = localStorage.getItem("precomp_checklist_v2");
     return saved ? JSON.parse(saved) : defaultChecklist;
   });
 
-  useEffect(() => localStorage.setItem("precomp_checklist", JSON.stringify(checklist)), [checklist]);
+  useEffect(() => localStorage.setItem("precomp_checklist_v2", JSON.stringify(checklist)), [checklist]);
 
   const toggleChecklist = (id) => {
     setChecklist(checklist.map(item => 
@@ -42,6 +76,9 @@ export default function PreCompChecklist() {
   const completedCount = checklist.filter(item => item.completed).length;
   const readiness = Math.round((completedCount / checklist.length) * 100);
 
+  // Extract unique categories to map through them in the UI
+  const categories = [...new Set(checklist.map(item => item.category))];
+
   return (
     <div style={{ padding: '40px 20px', maxWidth: '900px', margin: '0 auto' }}>
       
@@ -50,7 +87,7 @@ export default function PreCompChecklist() {
         <PlaneTakeoff size={40} color="var(--accent)" />
         <div>
           <h2 style={{ margin: 0, fontSize: '32px', color: 'var(--text-main)', fontWeight: '700' }}>Pre-Comp Checklist</h2>
-          <p style={{ margin: '5px 0 0 0', color: 'var(--text-muted)', fontWeight: '600' }}>too many times have i forgotten things pre-comp... so here's a handy pre-comp checklist to ensure you don't miss anything! it doesn't save once you exit the web app though...</p>
+          <p style={{ margin: '5px 0 0 0', color: 'var(--text-muted)', fontWeight: '600' }}>Too many times have we forgotten things pre-comp... so here's a highly technical checklist to ensure you never miss a beat. (Progress saves locally to your browser!)</p>
         </div>
       </div>
 
@@ -87,7 +124,7 @@ export default function PreCompChecklist() {
           </div>
 
           {/* Big Progress Bar */}
-          <div style={{ marginBottom: '30px' }}>
+          <div style={{ marginBottom: '40px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>
               <span>Tournament Readiness</span>
               <span style={{ color: readiness === 100 ? '#27c93f' : 'var(--text-main)' }}>{readiness}%</span>
@@ -101,36 +138,57 @@ export default function PreCompChecklist() {
             </div>
           </div>
           
-          {/* The Interactive List */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {checklist.map((item) => (
-              <div 
-                key={item.id} 
-                onClick={() => toggleChecklist(item.id)}
-                style={{ 
-                  display: 'flex', alignItems: 'center', gap: '15px', padding: '16px 20px', 
-                  backgroundColor: item.completed ? 'var(--window-bg)' : 'var(--nav-hover)', 
-                  borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s',
-                  border: '1px solid',
-                  borderColor: item.completed ? 'var(--window-border)' : 'transparent',
-                  borderLeft: item.completed ? '5px solid #27c93f' : '5px solid transparent',
-                  opacity: item.completed ? 0.6 : 1
-                }}
-                onMouseEnter={(e) => { if (!item.completed) e.currentTarget.style.transform = 'translateX(4px)' }}
-                onMouseLeave={(e) => { if (!item.completed) e.currentTarget.style.transform = 'translateX(0)' }}
-              >
-                <div style={{ 
-                  width: '24px', height: '24px', borderRadius: '6px', border: '2px solid',
-                  borderColor: item.completed ? '#27c93f' : 'var(--text-muted)',
-                  backgroundColor: item.completed ? '#27c93f' : 'var(--window-bg)',
-                  display: 'flex', justifyContent: 'center', alignItems: 'center',
-                  flexShrink: 0, transition: 'all 0.2s'
+          {/* The Categorized Interactive List */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+            {categories.map((category) => (
+              <div key={category}>
+                
+                {/* Category Title */}
+                <h4 style={{ 
+                  color: 'var(--accent)', 
+                  marginBottom: '15px', 
+                  fontSize: '16px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                  borderBottom: '1px solid var(--window-border)',
+                  paddingBottom: '8px'
                 }}>
-                  {item.completed && <Check size={16} color="#000" strokeWidth={3} />}
+                  {category}
+                </h4>
+
+                {/* Items in this Category */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  {checklist.filter(item => item.category === category).map((item) => (
+                    <div 
+                      key={item.id} 
+                      onClick={() => toggleChecklist(item.id)}
+                      style={{ 
+                        display: 'flex', alignItems: 'center', gap: '15px', padding: '14px 16px', 
+                        backgroundColor: item.completed ? 'var(--window-bg)' : 'var(--nav-hover)', 
+                        borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s',
+                        border: '1px solid',
+                        borderColor: item.completed ? 'var(--window-border)' : 'transparent',
+                        borderLeft: item.completed ? '5px solid #27c93f' : '5px solid transparent',
+                        opacity: item.completed ? 0.6 : 1
+                      }}
+                      onMouseEnter={(e) => { if (!item.completed) e.currentTarget.style.transform = 'translateX(4px)' }}
+                      onMouseLeave={(e) => { if (!item.completed) e.currentTarget.style.transform = 'translateX(0)' }}
+                    >
+                      <div style={{ 
+                        width: '22px', height: '22px', borderRadius: '6px', border: '2px solid',
+                        borderColor: item.completed ? '#27c93f' : 'var(--text-muted)',
+                        backgroundColor: item.completed ? '#27c93f' : 'var(--window-bg)',
+                        display: 'flex', justifyContent: 'center', alignItems: 'center',
+                        flexShrink: 0, transition: 'all 0.2s'
+                      }}>
+                        {item.completed && <Check size={14} color="#000" strokeWidth={3} />}
+                      </div>
+                      <span style={{ fontSize: '14px', textDecoration: item.completed ? 'line-through' : 'none', color: 'var(--text-main)', lineHeight: '1.4', fontWeight: '600' }}>
+                        {item.text}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-                <span style={{ fontSize: '15px', textDecoration: item.completed ? 'line-through' : 'none', color: 'var(--text-main)', lineHeight: '1.4', fontWeight: '600' }}>
-                  {item.text}
-                </span>
               </div>
             ))}
           </div>

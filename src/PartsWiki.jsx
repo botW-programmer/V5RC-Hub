@@ -18,13 +18,13 @@ const vexParts = [
     specs: { Battery: "Rechargeable Li-Ion", Screen: "Monochrome LCD", Connection: "VEXnet / Bluetooth", Weight: "0.85 lbs (385g)" }
   },
   { 
-    id: 3, name: "V5 Robot Battery", category: "Electronics", price: "$64.99", 
+    id: 3, name: "V5 Robot Battery", category: "Electronics", price: "$76.99", 
     link: "https://www.vexrobotics.com/276-4811.html",
     desc: "Provides consistent 12.8V power to the V5 Brain, ensuring no performance drop off.",
     specs: { Voltage: "12.8V", Chemistry: "Li-Ion", Capacity: "1100 mAh", Weight: "1.06 lbs (480g)" }
   },
   { 
-    id: 4, name: "V5 Robot Radio", category: "Electronics", price: "$34.99", 
+    id: 4, name: "V5 Robot Radio", category: "Electronics", price: "$48.79", 
     link: "https://www.vexrobotics.com/276-4831.html",
     desc: "Enables wireless communication between the V5 Brain and Controller.",
     specs: { Connection: "VEXnet 3 / Bluetooth", Indicator: "LED Status", Mount: "Snap-in", Weight: "0.06 lbs (27g)" }
@@ -38,13 +38,13 @@ const vexParts = [
     specs: { Power: "11 Watts", Max_RPM: "600 RPM (with cartridge)", Encoder: "Built-in Absolute", Weight: "0.34 lbs (154g)" }
   },
   { 
-    id: 6, name: "EXP Smart Motor (5.5W)", category: "Motion", price: "$34.99", 
+    id: 6, name: "EXP Smart Motor (5.5W)", category: "Motion", price: "$33.49", 
     link: "https://www.vexrobotics.com/276-4842.html",
     desc: "Half-power motor perfectly sized for intakes, conveyors, and low-torque mechanisms.",
     specs: { Power: "5.5 Watts", Max_RPM: "600 RPM (with cartridge)", Encoder: "Built-in Absolute", Weight: "0.17 lbs (77g)" }
   },
   { 
-    id: 7, name: "V5 Motor Gear Cartridge", category: "Motion", price: "$14.99", 
+    id: 7, name: "V5 Motor Gear Cartridge", category: "Motion", price: "$13.29", 
     link: "https://www.vexrobotics.com/276-4840.html",
     desc: "Replacement cartridges for V5 Smart Motors to change the internal gear ratio.",
     specs: { Speed: "100, 200, or 600 RPM", Torque: "Varies", Color: "Red, Green, Blue", Weight: "0.05 lbs (23g)" }
@@ -250,7 +250,7 @@ export default function PartsWiki() {
         <Box size={40} color="var(--accent)" />
         <div>
           <h2 style={{ margin: 0, fontSize: '32px', color: 'var(--text-main)', fontWeight: '700' }}>Parts Wiki</h2>
-          <p style={{ margin: '5px 0 0 0', color: 'var(--text-muted)', fontWeight: '600' }}>the parts wiki is essentially a prettier and better way to few the specs of different V5 parts! if you want any parts added to the list, please paste the link in the message board!</p>
+          <p style={{ margin: '5px 0 0 0', color: 'var(--text-muted)', fontWeight: '600' }}>The parts wiki is essentially a prettier and better way to view the specs of different V5 parts! If you want any parts added to the list, please paste the link in the message board!</p>
         </div>
       </div>
 
