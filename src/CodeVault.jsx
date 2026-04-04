@@ -57,14 +57,15 @@ while True:
     category: "Pneumatics",
     description: "A robust state-machine toggle. Rather than writing separate 'open' and 'close' buttons, this logic uses a boolean variable to track the cylinder's current state and flips it every time a single button is pressed, saving valuable controller space.",
     cpp: `// Pneumatic State Tracker
+// tells the robot that the clamp is closed
 bool isClampOpen = false;
 
 void toggleClamp() {
-  isClampOpen = !isClampOpen; // Flip the boolean state
+  isClampOpen = !isClampOpen; // flips the boolean state
   ClampCylinder.set(isClampOpen);
 }
 
-// Register the event inside int main() or initialization:
+// Registers the event inside int main() or initialization:
 Controller1.ButtonA.pressed(toggleClamp);`,
     python: `# Pneumatic State Tracker
 is_clamp_open = False
@@ -85,35 +86,33 @@ controller_1.buttona.pressed(toggle_clamp)`
     cpp: `// Draw a styled team logo on the Brain
 Brain.Screen.clearScreen();
 
-// Draw a dark background rectangle
+// Draw a dark background rectangle (change the color)
 Brain.Screen.setFillColor(vex::color(40, 40, 40));
 Brain.Screen.drawRectangle(0, 0, 480, 240);
 
-// Draw the Team Number in Cyan
+// Draw the Team Number in Cyan (change the color)
 Brain.Screen.setFont(vex::fontType::prop60);
 Brain.Screen.setPenColor(vex::color::cyan);
-Brain.Screen.printAt(140, 120, "TEAM 99999X");
+Brain.Screen.printAt(140, 120, "TEAM ______");
 
-// Draw a subtitle
-Brain.Screen.setFont(vex::fontType::mono20);
+// Draw a subtitle (change the color)
 Brain.Screen.setPenColor(vex::color::white);
-Brain.Screen.printAt(155, 160, "Systems Nominal");`,
+Brain.Screen.printAt(155, 160, "___________");`,
     python: `# Draw a styled team logo on the Brain
 brain.screen.clear_screen()
 
-# Draw a dark background rectangle
+# Draw a dark background rectangle (change the color)
 brain.screen.set_fill_color(Color(40, 40, 40))
 brain.screen.draw_rectangle(0, 0, 480, 240)
 
-# Draw the Team Number in Cyan
+# Draw the Team Number in Cyan (change the color)
 brain.screen.set_font(FontType.PROP60)
 brain.screen.set_pen_color(Color.CYAN)
-brain.screen.print_at("TEAM 99999X", x=140, y=120)
+brain.screen.print_at("TEAM _______", x=140, y=120)
 
-# Draw a subtitle
-brain.screen.set_font(FontType.MONO20)
+# Draw a subtitle (change the color)
 brain.screen.set_pen_color(Color.WHITE)
-brain.screen.print_at("Systems Nominal", x=155, y=160)`
+brain.screen.print_at("________", x=155, y=160)`
   }
 ];
 
